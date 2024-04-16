@@ -50,18 +50,18 @@ int main() {
 
 	while (true) {
 		printBoard(board);
-		printf("\nÁÂÇ¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä(¼ıÀÚ,¼ıÀÚ) : ");
+		printf("\nì¢Œí‘œë¥¼ ì…ë ¥í•˜ì„¸ìš”(ìˆ«ì,ìˆ«ì) : ");
 		scanf("%d,%d", &row, &col);
 
 		if (!isValidMove(board, row, col)) {
-			printf("ÀÌ¹Ì µ¹ÀÌ ³õ¿© ÀÖ½À´Ï´Ù\n");
+			printf("ì´ë¯¸ ëŒì´ ë†“ì—¬ ìˆìŠµë‹ˆë‹¤\n");
 			continue;
 		}
 
 		placeStone(board, row, col, currentPlayer);
 
 		countStones(board, &blackStone, &whiteStone);
-		printf("°ËÀº µ¹ °³¼ö : %d, Èò µ¹ °³¼ö : %d\n", blackStone, whiteStone);
+		printf("ê²€ì€ ëŒ ê°œìˆ˜ : %d, í° ëŒ ê°œìˆ˜ : %d\n", blackStone, whiteStone);
 
 		currentPlayer = (currentPlayer == 'o') ? 'x' : 'o';
 	}
