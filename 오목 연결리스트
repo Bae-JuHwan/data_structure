@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 
 using namespace std;
 
@@ -52,7 +51,10 @@ int main() {
 		}
 		cout << "   가로		세로" << '\n';
 		for (int i = 0; i < ROW; ++i) {
-			cout << setw(2) << i << " : b" << b_stone << ", w" << w_stone << "  | " << i << " : b" << b_stone << ", w" << w_stone << '\n';
+if (i < 10) {
+cout << " ";
+}
+			cout << i << " : b" << b_stone << ", w" << w_stone << "  | " << i << " : b" << b_stone << ", w" << w_stone << '\n';
 		}
 		cout << '\n';
 		placeStone(map, row, col, blackStone);
