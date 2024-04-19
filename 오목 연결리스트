@@ -12,7 +12,7 @@ string map[ROW][COL];
 void set() {
 	for (int i = 0; i < ROW; ++i) {
 		for (int j = 0; j < COL; ++j) {
-			map[i][j] = "¡à ";
+			map[i][j] = "â–¡ ";
 		}
 	}
 }
@@ -34,23 +34,23 @@ int main() {
 	map[ROW - 1][COL - 1];
 	int b_stone = 0, w_stone = 0;
 	int row, col;
-	string blackStone = "¡Ü ";
-	string whiteStone = "¡Û ";
+	string blackStone = "â— ";
+	string whiteStone = "â—‹ ";
 
 	set();
 
 	while (true) {
 		printMap();
-		cout << "ÁÂÇ¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ¼ýÀÚ ¼ýÀÚ" << '\n';
+		cout << "ì¢Œí‘œë¥¼ ìž…ë ¥í•˜ì„¸ìš” : ìˆ«ìž ìˆ«ìž" << '\n';
 		cin >> row >> col;
 		if (cin.fail()) {
-			cout << "¼ýÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" << '\n';
+			cout << "ìˆ«ìžë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”" << '\n';
 			cout << "\n";
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			continue;
 		}
-		cout << "   °¡·Î		¼¼·Î" << '\n';
+		cout << "   ê°€ë¡œ		ì„¸ë¡œ" << '\n';
 		for (int i = 0; i < ROW; ++i) {
 			cout << setw(2) << i << " : b" << b_stone << ", w" << w_stone << "  | " << i << " : b" << b_stone << ", w" << w_stone << '\n';
 		}
