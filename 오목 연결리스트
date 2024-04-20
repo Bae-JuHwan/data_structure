@@ -51,9 +51,9 @@ int main() {
 		}
 		cout << "   가로		세로" << '\n';
 		for (int i = 0; i < ROW; ++i) {
-if (i < 10) {
-cout << " ";
-}
+			if (i < 10) {
+				cout << " ";
+				    }
 			cout << i << " : b" << b_stone << ", w" << w_stone << "  | " << i << " : b" << b_stone << ", w" << w_stone << '\n';
 		}
 		cout << '\n';
