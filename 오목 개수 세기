@@ -1,6 +1,6 @@
-// ¿À¸ñÆÇÀÇ ¸ðµç °¡·Î, ¼¼·ÎÁÙ¿¡ ´ëÇÏ¿© ±× ÁÙ¿¡¼­ °¡Àå ¸¹ÀÌ ¿¬¼ÓÀ¸·Î ³õ¿©Áø µ¹ÀÇ Á¾·ù¿Í °³¼ö¸¦ Ãâ·ÂÇÏ¶ó
-// ¿À¸ñÆÇÀÇ ¸ðµç ´ë°¢¼± ÁÙ¿¡ ´ëÇÏ¿© ±× ÁÙ¿¡¼­ °¡Àå ¸¹ÀÌ ¿¬¼ÓÀ¸·Î ³õ¿©Áø µ¹ÀÇ Á¾·ù¿Í °³¼ö¸¦ Ãâ·ÂÇÏ¶ó
-// ¸ðµç °¡·ÎÁÙ¿¡ ´ëÇØ¼­´Â °¡Àå ¸¹ÀÌ ¿¬¼ÓÀ¸·Î ³õ¿©Áø µ¹µéÀÇ À§Ä¡¸¦ ÁÂÇ¥·Î Ç¥½ÃÇÏ¶ó
+// ì˜¤ëª©íŒì˜ ëª¨ë“  ê°€ë¡œ, ì„¸ë¡œì¤„ì— ëŒ€í•˜ì—¬ ê·¸ ì¤„ì—ì„œ ê°€ìž¥ ë§Žì´ ì—°ì†ìœ¼ë¡œ ë†“ì—¬ì§„ ëŒì˜ ì¢…ë¥˜ì™€ ê°œìˆ˜ë¥¼ ì¶œë ¥í•˜ë¼
+// ì˜¤ëª©íŒì˜ ëª¨ë“  ëŒ€ê°ì„  ì¤„ì— ëŒ€í•˜ì—¬ ê·¸ ì¤„ì—ì„œ ê°€ìž¥ ë§Žì´ ì—°ì†ìœ¼ë¡œ ë†“ì—¬ì§„ ëŒì˜ ì¢…ë¥˜ì™€ ê°œìˆ˜ë¥¼ ì¶œë ¥í•˜ë¼
+// ëª¨ë“  ê°€ë¡œì¤„ì— ëŒ€í•´ì„œëŠ” ê°€ìž¥ ë§Žì´ ì—°ì†ìœ¼ë¡œ ë†“ì—¬ì§„ ëŒë“¤ì˜ ìœ„ì¹˜ë¥¼ ì¢Œí‘œë¡œ í‘œì‹œí•˜ë¼
 
 #include <iostream>
 #include <string>
@@ -25,7 +25,7 @@ struct Line {
 void set() {
 	for (int i = 0; i < ROW; ++i) {
 		for (int j = 0; j < COL; ++j) {
-			map[i][j] = "¡à ";
+			map[i][j] = "â–¡ ";
 		}
 	}
 }
@@ -35,8 +35,8 @@ void printMap(Line lines[ROW + COL + L_To_R + R_To_L]) {
 		for (int j = 0; j < COL; ++j) {
 			cout << map[i][j];
 		}
-		cout << "   " << i << " : °¡·Î b" << lines[i].blackStone << ", w" << lines[i].whiteStone <<
-			",   ¼¼·Î b" << lines[ROW + i].blackStone << ", w" << lines[ROW + i].whiteStone << '\n';
+		cout << "   " << i << " : ê°€ë¡œ b" << lines[i].blackStone << ", w" << lines[i].whiteStone <<
+			",   ì„¸ë¡œ b" << lines[ROW + i].blackStone << ", w" << lines[ROW + i].whiteStone << '\n';
 	}
 }
 
@@ -45,7 +45,7 @@ void placeStone(string map[ROW][COL], int row, int col, string stone) {
 }
 
 bool isValidMove(string map[ROW][COL], int row, int col) {
-	return (map[row][col] == "¡à ");
+	return (map[row][col] == "â–¡ ");
 }
 
 void countStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][COL], int row, int col ) {
@@ -56,17 +56,17 @@ void countStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][COL], i
 	lines[ROW + col].whiteStone = 0;
 
 	for (int i = 0; i < ROW; ++i) {
-		if (map[row][i] == "¡Ü ") {
+		if (map[row][i] == "â— ") {
 			lines[row].blackStone++;
 		}
-		else if (map[row][i] == "¡Û ") {
+		else if (map[row][i] == "â—‹ ") {
 			lines[row].whiteStone++;
 		}
 
-		if (map[i][col] == "¡Ü ") {
+		if (map[i][col] == "â— ") {
 			lines[ROW + col].blackStone++;
 		}
-		else if (map[i][col] == "¡Û ") {
+		else if (map[i][col] == "â—‹ ") {
 			lines[ROW + col].whiteStone++;
 		}
 	}
@@ -87,7 +87,7 @@ void consecutiveStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][C
 
 	int startCol = -1;
 	for (int i = 0; i < ROW; ++i) {
-		if (map[row][i] == "¡Ü ") {
+		if (map[row][i] == "â— ") {
 			lines[row].longConsecutiveBlack = 1;
 			if (startCol == -1) {
 				startCol = i;
@@ -96,7 +96,7 @@ void consecutiveStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][C
 				lines[row].longConsecutiveBlack++;
 			}
 		}
-		else if (map[row][i] == "¡Û ") {
+		else if (map[row][i] == "â—‹ ") {
 			lines[row].longConsecutiveWhite = 1;
 			if (startCol == -1) {
 				startCol = i;
@@ -106,43 +106,43 @@ void consecutiveStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][C
 			}
 		}
 		if (lines[i].longConsecutiveBlack > lines[i].longConsecutiveWhite) {
-			cout << i << " : °¡·Î, °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[i].longConsecutiveBlack << '\n';
+			cout << i << " : ê°€ë¡œ, ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[i].longConsecutiveBlack << '\n';
 		}
 		else if (lines[i].longConsecutiveBlack < lines[i].longConsecutiveWhite) {
-			cout << i << " : °¡·Î, Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[i].longConsecutiveWhite << '\n';
+			cout << i << " : ê°€ë¡œ, í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[i].longConsecutiveWhite << '\n';
 		}
 		else if (lines[i].longConsecutiveBlack == lines[i].longConsecutiveWhite) {
-			cout << i << " : °¡·Î, °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[i].longConsecutiveBlack <<
-				", : °¡·Î, Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[i].longConsecutiveWhite << '\n';
+			cout << i << " : ê°€ë¡œ, ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[i].longConsecutiveBlack <<
+				", : ê°€ë¡œ, í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[i].longConsecutiveWhite << '\n';
 		}
 		if (startCol != -1 && (i == ROW - 1 || map[row][i] != map[row][i + 1])) {
-			cout << row << " : À§Ä¡(" << row << ", " << startCol << ")~(" << row << ", " << i << ")" << '\n';
+			cout << row << " : ìœ„ì¹˜(" << row << ", " << startCol << ")~(" << row << ", " << i << ")" << '\n';
 			startCol = -1;
 		}
 	}
 
 	for (int i = 0; i < COL; ++i) {
-		if (map[i][col] == "¡Ü ") {
+		if (map[i][col] == "â— ") {
 			lines[ROW + col].longConsecutiveBlack = 1;
 			if (map[i][col] == map[i + 1][col] && i + 1 < COL) {
 				lines[ROW + col].longConsecutiveBlack++;
 			}
 		}
-		else if (map[i][col] == "¡Û ") {
+		else if (map[i][col] == "â—‹ ") {
 			lines[ROW + col].longConsecutiveWhite = 1;
 			if (map[i][col] == map[i + 1][col] && i + 1 < COL) {
 				lines[ROW + col].longConsecutiveWhite++;
 			}
 		}
 		if (lines[ROW + i].longConsecutiveBlack > lines[ROW + i].longConsecutiveWhite) {
-			cout << i << " : ¼¼·Î, °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + i].longConsecutiveBlack << '\n';
+			cout << i << " : ì„¸ë¡œ, ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + i].longConsecutiveBlack << '\n';
 		}
 		else if (lines[ROW + i].longConsecutiveBlack < lines[ROW + i].longConsecutiveWhite) {
-			cout << i << " : ¼¼·Î, Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + i].longConsecutiveWhite << '\n';
+			cout << i << " : ì„¸ë¡œ, í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + i].longConsecutiveWhite << '\n';
 		}
 		else if (lines[ROW + i].longConsecutiveBlack == lines[ROW + i].longConsecutiveWhite) {
-			cout << i << " : ¼¼·Î, °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + i].longConsecutiveBlack << 
-				" : ¼¼·Î, Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + i].longConsecutiveWhite << '\n';
+			cout << i << " : ì„¸ë¡œ, ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + i].longConsecutiveBlack << 
+				" : ì„¸ë¡œ, í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + i].longConsecutiveWhite << '\n';
 		}
 	}
 	for (int i = 0; i < L_To_R; ++i) {
@@ -150,22 +150,22 @@ void consecutiveStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][C
 		int startCol = min(i, COL - 1);
 
 		for (int r = startRow, c = startCol; r + 1 < ROW && c + 1 < COL; ++r, ++c) {
-			if (map[r][c] == "¡Ü ") {
+			if (map[r][c] == "â— ") {
 				lines[ROW + COL + i].longConsecutiveBlack++;
 			}
-			else if (map[r][c] == "¡Û ") {
+			else if (map[r][c] == "â—‹ ") {
 				lines[ROW + COL + i].longConsecutiveWhite++;
 			}
 		}
 		if (lines[ROW + COL + i].longConsecutiveBlack > lines[ROW + COL + i].longConsecutiveWhite) {
-			cout << i << " : ´ë°¢¼±(ÁÂ»ó´Ü->¿ìÇÏ´Ü), °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + i].longConsecutiveBlack << '\n';
+			cout << i << " : ëŒ€ê°ì„ (ì¢Œìƒë‹¨->ìš°í•˜ë‹¨), ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + i].longConsecutiveBlack << '\n';
 		}
 		else if (lines[ROW + COL + i].longConsecutiveBlack < lines[ROW + COL + i].longConsecutiveWhite) {
-			cout << i << " : ´ë°¢¼±(ÁÂ»ó´Ü->¿ìÇÏ´Ü), Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + i].longConsecutiveWhite << '\n';
+			cout << i << " : ëŒ€ê°ì„ (ì¢Œìƒë‹¨->ìš°í•˜ë‹¨), í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + i].longConsecutiveWhite << '\n';
 		}
 		else if (lines[ROW + COL + i].longConsecutiveBlack == lines[ROW + COL + i].longConsecutiveWhite) {
-			cout << i << " : ´ë°¢¼±(ÁÂ»ó´Ü->¿ìÇÏ´Ü), °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + i].longConsecutiveBlack <<
-				" : ´ë°¢¼±(ÁÂ»ó´Ü->¿ìÇÏ´Ü), Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + i].longConsecutiveWhite << '\n';
+			cout << i << " : ëŒ€ê°ì„ (ì¢Œìƒë‹¨->ìš°í•˜ë‹¨), ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + i].longConsecutiveBlack <<
+				" : ëŒ€ê°ì„ (ì¢Œìƒë‹¨->ìš°í•˜ë‹¨), í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + i].longConsecutiveWhite << '\n';
 		}
 	}
 
@@ -175,22 +175,22 @@ void consecutiveStone(Line lines[ROW + COL + L_To_R + R_To_L], string map[ROW][C
 		int startCol = max(0, COL - 1 - (i - ROW + 1));
 
 		for (int r = startRow, c = startCol; r - 1 >= 0 && c + 1 < COL; --r, ++c) {
-			if (map[r][c] == "¡Ü ") {
+			if (map[r][c] == "â— ") {
 				lines[ROW + COL + L_To_R + i].longConsecutiveBlack++;
 			}
-			else if (map[r][c] == "¡Û ") {
+			else if (map[r][c] == "â—‹ ") {
 				lines[ROW + COL + L_To_R + i].longConsecutiveWhite++;
 			}
 		}
 		if (lines[ROW + COL + L_To_R + i].longConsecutiveBlack > lines[ROW + COL + L_To_R + i].longConsecutiveWhite) {
-			cout << i << " : ´ë°¢¼±(¿ì»ó´Ü->ÁÂÇÏ´Ü), °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + L_To_R + i].longConsecutiveBlack << '\n';
+			cout << i << " : ëŒ€ê°ì„ (ìš°ìƒë‹¨->ì¢Œí•˜ë‹¨), ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + L_To_R + i].longConsecutiveBlack << '\n';
 		}
 		else if (lines[ROW + COL + L_To_R + i].longConsecutiveBlack < lines[ROW + COL + L_To_R + i].longConsecutiveWhite) {
-			cout << i << " : ´ë°¢¼±(¿ì»ó´Ü->ÁÂÇÏ´Ü), Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + L_To_R + i].longConsecutiveWhite << '\n';
+			cout << i << " : ëŒ€ê°ì„ (ìš°ìƒë‹¨->ì¢Œí•˜ë‹¨), í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + L_To_R + i].longConsecutiveWhite << '\n';
 		}
 		else if (lines[ROW + COL + L_To_R + i].longConsecutiveBlack == lines[ROW + COL + L_To_R + i].longConsecutiveWhite) {
-			cout << i << " : ´ë°¢¼±(¿ì»ó´Ü->ÁÂÇÏ´Ü), °ËÀºµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + L_To_R + i].longConsecutiveBlack <<
-				" : ´ë°¢¼±(¿ì»ó´Ü->ÁÂÇÏ´Ü), Èòµ¹, ¿¬¼Ó°³¼ö : " << lines[ROW + COL + L_To_R + i].longConsecutiveWhite << '\n';
+			cout << i << " : ëŒ€ê°ì„ (ìš°ìƒë‹¨->ì¢Œí•˜ë‹¨), ê²€ì€ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + L_To_R + i].longConsecutiveBlack <<
+				" : ëŒ€ê°ì„ (ìš°ìƒë‹¨->ì¢Œí•˜ë‹¨), í°ëŒ, ì—°ì†ê°œìˆ˜ : " << lines[ROW + COL + L_To_R + i].longConsecutiveWhite << '\n';
 		}
 	}
 }
@@ -200,19 +200,19 @@ int main() {
 	int b_stone = 0, w_stone = 0;
 	int row, col;
 	int l_to_r = 0, r_to_l = 0;
-	string currentPlayer = "¡Ü ";
-	string blackStone = "¡Ü ";
-	string whiteStone = "¡Û ";
+	string currentPlayer = "â— ";
+	string blackStone = "â— ";
+	string whiteStone = "â—‹ ";
 
 	set();
 	printMap(lines);
 
 	while (true) {
-		cout << "ÁÂÇ¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä : ¼ýÀÚ ¼ýÀÚ" << '\n';
+		cout << "ì¢Œí‘œë¥¼ ìž…ë ¥í•˜ì„¸ìš” : ìˆ«ìž ìˆ«ìž" << '\n';
 		cin >> row >> col;
 
 		if (cin.fail() || row < 0 || row > 18 || col < 0 || col > 18) {
-			cout << "¹üÀ§¿¡ ¸Â´Â ¼ýÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä(0~18)" << '\n';
+			cout << "ë²”ìœ„ì— ë§žëŠ” ìˆ«ìžë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”(0~18)" << '\n';
 			cout << "\n";
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -220,7 +220,7 @@ int main() {
 		}
 
 		if (!isValidMove(map, row, col)) {
-			cout << "ÀÌ¹Ì µ¹ÀÌ ÀÖ½À´Ï´Ù" << '\n';
+			cout << "ì´ë¯¸ ëŒì´ ìžˆìŠµë‹ˆë‹¤" << '\n';
 			continue;
 		}
 		
@@ -233,6 +233,6 @@ int main() {
 		printMap(lines);
 		consecutiveStone(lines, map, row, col, l_to_r, r_to_l);
 
-		currentPlayer = (currentPlayer == "¡Ü ") ? "¡Û " : "¡Ü ";
+		currentPlayer = (currentPlayer == "â— ") ? "â—‹ " : "â— ";
 	}
 }
