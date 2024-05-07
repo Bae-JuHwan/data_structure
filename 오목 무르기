@@ -23,7 +23,7 @@ Node* make_turn(int a, int b, Node* p);
 void save(int count);
 void load(int count, Node* p);
 void undo(int&, Node*, int board[19][19]);
-void redo(int&, Node*&, int board[19][19]);
+void redo(int&, Node*, int board[19][19]);
 
 int main() {
 	char key;
@@ -104,7 +104,7 @@ int main() {
 			undo(count, plist, board);
 			break;
 		case 'R':
-			redo(count, *&plist, board);
+			redo(count, plist, board);
 			break;
 		default:
 			cout << "명령어를 잘못입력하였습니다. 다시 입력하세요" << '\n';
@@ -153,9 +153,8 @@ void save(int count) {
 		file.close();
 	}
 	else {
-		cerr << "로드 할 파일을 열 수 없습니다" << '\n';
+		cerr << "세이브 할 파일을 열 수 없습니다" << '\n';
 	}
-	return;
 }
 
 void load(int count, Node* p) {
@@ -169,7 +168,7 @@ void load(int count, Node* p) {
 		file.close();
 	}
 	else {
-		cerr << "세이브 할 파일을 열 수 없습니다" << '\n';
+		cerr << "로드 할 파일을 열 수 없습니다" << '\n';
 	}
 }
 
@@ -184,7 +183,7 @@ void undo(int& count, Node* p, int board[19][19]) {
 	}
 }
 
-void redo(int& count, Node*& p, int board[19][19]) {
+void redo(int& count, Node* p, int board[19][19]) {
 	if (p && p->next) {
 		p = p->next;
 		board[p->x][p->y] = (count % 2 == 0) ? BLACK : WHITE;
