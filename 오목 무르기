@@ -7,12 +7,13 @@ using namespace std;
 enum Stone {
 	NONE,
 	BLACK,
-	WHITE,
+	WHITE
 };
 
 struct Node {
 	int x;
 	int y;
+
 	struct Node* next;
 	struct Node* prev;
 
@@ -20,8 +21,8 @@ struct Node {
 };
 
 Node* make_turn(int a, int b, Node* p);
-void save(int count);
-void load(int count, Node* p);
+void save(int count, Node* p);
+void load(Node*& p);
 void undo(int&, Node*, int board[19][19]);
 void redo(int&, Node*, int board[19][19]);
 
@@ -34,7 +35,7 @@ int main() {
 	Node* temp = nullptr;
 
 	while (true) {
-		for (i = 0; i < BOARD_SIZE; ++i) {
+		for (i = 0; i < BOARD_SIZE; ++i) {		// 검은돌, 흰돌, 나머지는 판으로 나누기
 			for (j = 0; j < BOARD_SIZE; ++j) {
 				switch (board[i][j]) {
 				case BLACK:
@@ -51,18 +52,18 @@ int main() {
 			cout << '\n';
 		}
 
-		if (count % 2 == 0) {
+		if (count % 2 == 0) {							// 카운트가 홀수인경우 검은 돌 차례
 			int row, col;
 			do {
-				cout << "검은돌을 놓기 위해 0~18의 숫자를 입력해주세요 : ";
+				cout << "검은돌을 놓기위히 0~18의 숫자를 입력하세요 : ";		// 좌표입력
 				cin >> row >> col;
 
-				if (!(row >= 0 && row < 19 && col >= 0 && col < 19)) {
+				if (!(row >= 0 && row < 19 && col >= 0 && col < 19)) {			// 예외처리
 					cout << "잘못된 위치입니다. 다시 입력하세요" << '\n';
 					continue;
 				}
-				if (board[row][col] != NONE) {
-					cout << "이미 돌이 놓여있습니다. 다른 위치를 선택하세요" << '\n';
+				if (board[row][col] != NONE) {									// 이미 돌이 있는 경우
+					cout << "이미 돌이 놓여 있습니다. 다른 위치를 선택하세요" << '\n';
 					continue;
 				}
 				break;
@@ -70,10 +71,10 @@ int main() {
 			board[row][col] = BLACK;
 			plist = make_turn(row, col, plist);
 		}
-		else {
+		else {											// 카운트가 짝수인경우 흰 돌 차례
 			int row, col;
 			do {
-				cout << "흰돌을 놓기 위해 0~18의 숫자를 입력해주세요 : ";
+				cout << "흰돌을 놓기위해 0~18의 숫자를 입력하세요 : ";
 				cin >> row >> col;
 
 				if (!(row >= 0 && row < 19 && col >= 0 && col < 19)) {
@@ -81,7 +82,7 @@ int main() {
 					continue;
 				}
 				if (board[row][col] != NONE) {
-					cout << "이미 돌이 놓여있습니다. 다른 위치를 선택하세요" << '\n';
+					cout << "이미 돌이 놓여 있습니다. 다른 위치를 선택하세요" << '\n';
 					continue;
 				}
 				break;
@@ -95,10 +96,10 @@ int main() {
 		cin >> key;
 		switch (key) {
 		case 'S':
-			save(count);
+			save(count, plist);
 			break;
 		case 'L':
-			load(count, plist);
+			load(plist);
 			break;
 		case 'U':
 			undo(count, plist, board);
@@ -139,31 +140,31 @@ Node* make_turn(int a, int b, Node* p) {
 	return p;
 }
 
-void save(int count) {
-	ifstream file("save.txt");
-	Node* p = nullptr;
-
-	if (file.is_open()) {
-		file >> count;
-		for (int i = 0; i < count; ++i) {
-			int x, y;
-			file >> x >> y;
-			p = (x, y, p);
-		}
-		file.close();
-	}
-	else {
-		cerr << "세이브 할 파일을 열 수 없습니다" << '\n';
-	}
-}
-
-void load(int count, Node* p) {
+void save(int count, Node* p) {
 	ofstream file("save.txt");
 	if (file.is_open()) {
 		file << count << '\n';
 		while (p) {
 			file << p->x << " " << p->y << '\n';
 			p = p->next;
+		}
+		file.close();
+	}
+	else {
+		cerr << " 세이브 할 파일을 열 수 없습니다" << '\n';
+	}
+}
+	
+void load(Node*& p) {
+	ifstream file("save.txt");
+
+	if (file.is_open()) {
+		int count;
+		file >> count;
+		for (int i = 0; i < count; ++i) {
+			int x, y;
+			file >> x >> y;
+			p = make_turn(x, y, p);
 		}
 		file.close();
 	}
