@@ -22,7 +22,7 @@ struct Node {
 
 Node* make_turn(int a, int b, Node* p);
 void save(int count, Node* p);
-void load(Node*& p);
+void load(Node* p);
 void undo(int&, Node*, int board[19][19]);
 void redo(int&, Node*, int board[19][19]);
 
@@ -155,7 +155,7 @@ void save(int count, Node* p) {
 	}
 }
 	
-void load(Node*& p) {
+void load(Node* p) {
 	ifstream file("save.txt");
 
 	if (file.is_open()) {
