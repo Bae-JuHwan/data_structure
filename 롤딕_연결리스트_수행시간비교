@@ -68,7 +68,7 @@ void PrintAll_SL(SL& sl) {
         return;
     }
     Node* current = sl.head;
-    cout << "SL¿¡ ÀúÀåµÈ ¼ø¼­´ë·Î Ãâ·ÂÇÕ´Ï´Ù" << '\n';
+    cout << "SLì— ì €ìž¥ëœ ìˆœì„œëŒ€ë¡œ ì¶œë ¥í•©ë‹ˆë‹¤" << '\n';
     do {
         cout << current->position << ", " << current->name << ", " << current->health << ", " << current->attack << ", " << current->defense << '\n';
         current = current->next;
@@ -81,7 +81,7 @@ void PrintAll_DL(DL& dl) {
         return;
     }
     Node* current = dl.head;
-    cout << "DL¿¡ ÀúÀåµÈ ¼ø¼­´ë·Î Ãâ·ÂÇÕ´Ï´Ù" << '\n';
+    cout << "DLì— ì €ìž¥ëœ ìˆœì„œëŒ€ë¡œ ì¶œë ¥í•©ë‹ˆë‹¤" << '\n';
     while (current != nullptr) {
         cout << current->position << ", " << current->name << ", " << current->health << ", " << current->attack << ", " << current->defense << '\n';
         current = current->next;
@@ -171,7 +171,7 @@ void SortByName_DL(DL& dl) {
 
 void FindMaxHp_SL(SL& sl) {
     if (sl.head == nullptr) {
-        cout << "¸®½ºÆ®°¡ ºñ¾î ÀÖ½À´Ï´Ù." << '\n';
+        cout << "ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ ìžˆìŠµë‹ˆë‹¤." << '\n';
         return;
     }
 
@@ -187,7 +187,7 @@ void FindMaxHp_SL(SL& sl) {
         current = current->next;
     }
 
-    cout << "Ã¼·ÂÀÌ °¡Àå ³ôÀº Ã¨ÇÇ¾ð: " << '\n';
+    cout << "ì²´ë ¥ì´ ê°€ìž¥ ë†’ì€ ì±”í”¼ì–¸: " << '\n';
     current = sl.head;
     do {
         if (current->health == maxHealth) {
@@ -199,7 +199,7 @@ void FindMaxHp_SL(SL& sl) {
 
 void FindMaxHp_DL(DL& dl) {
     if (dl.head == nullptr) {
-        cout << "¸®½ºÆ®°¡ ºñ¾î ÀÖ½À´Ï´Ù." << '\n';
+        cout << "ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ ìžˆìŠµë‹ˆë‹¤." << '\n';
         return;
     }
 
@@ -215,7 +215,7 @@ void FindMaxHp_DL(DL& dl) {
         current = current->next;
     }
 
-    cout << "Ã¼·ÂÀÌ °¡Àå ³ôÀº Ã¨ÇÇ¾ð: " << '\n';
+    cout << "ì²´ë ¥ì´ ê°€ìž¥ ë†’ì€ ì±”í”¼ì–¸: " << '\n';
     current = maxNode;
     while (current != nullptr) {
         if (current->health == maxHealth) {
@@ -226,10 +226,10 @@ void FindMaxHp_DL(DL& dl) {
 }
 
 int main() {
-    ifstream in("ÀÓ½Ã.txt");
+    ifstream in("ìž„ì‹œ.txt");
 
     if (!in.is_open()) {
-        cout << "ÆÄÀÏÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù" << '\n';
+        cout << "íŒŒì¼ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤" << '\n';
         return 1;
     }
 
@@ -242,13 +242,13 @@ int main() {
     }
     in.close();
 
-    cout << "¸í·É¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << '\n';
-    cout << "PrintAll_SL : SL·Î ¸ðµç ³»¿ë Ãâ·Â" << '\n';
-    cout << "PrintAll_DL : DL·Î ¸ðµç ³»¿ë Ãâ·Â" << '\n';
-    cout << "SortByName_SL : SL·Î ÀÌ¸§ ¼ø¼­´ë·Î ÀúÀå" << '\n';
-    cout << "SortByName_DL : DL·Î ÀÌ¸§ ¼ø¼­´ë·Î ÀúÀå" << '\n';
-    cout << "FindMaxHp_SL : SL·Î °¡Àå Ã¼·ÂÀÌ ³ôÀº Ã¨ÇÇ¾ð Ãâ·Â" << '\n';
-    cout << "FindMaxHp_DL : DL·Î °¡Àå Ã¼·ÂÀÌ ³ôÀº Ã¨ÇÇ¾ð Ãâ·Â" << '\n';
+    cout << "ëª…ë ¹ì–´ë¥¼ ìž…ë ¥í•˜ì„¸ìš”" << '\n';
+    cout << "PrintAll_SL : SLë¡œ ëª¨ë“  ë‚´ìš© ì¶œë ¥" << '\n';
+    cout << "PrintAll_DL : DLë¡œ ëª¨ë“  ë‚´ìš© ì¶œë ¥" << '\n';
+    cout << "SortByName_SL : SLë¡œ ì´ë¦„ ìˆœì„œëŒ€ë¡œ ì €ìž¥" << '\n';
+    cout << "SortByName_DL : DLë¡œ ì´ë¦„ ìˆœì„œëŒ€ë¡œ ì €ìž¥" << '\n';
+    cout << "FindMaxHp_SL : SLë¡œ ê°€ìž¥ ì²´ë ¥ì´ ë†’ì€ ì±”í”¼ì–¸ ì¶œë ¥" << '\n';
+    cout << "FindMaxHp_DL : DLë¡œ ê°€ìž¥ ì²´ë ¥ì´ ë†’ì€ ì±”í”¼ì–¸ ì¶œë ¥" << '\n';
     cout << '\n';
 
     while (true) {
@@ -260,7 +260,7 @@ int main() {
             PrintAll_SL(sl);
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(end - start).count();
-            cout << "PrintAll_SL ¼öÇà½Ã°£: " << duration << "ÃÊ" << '\n';
+            cout << "PrintAll_SL ìˆ˜í–‰ì‹œê°„: " << duration << "ì´ˆ" << '\n';
             cout << '\n';
         }
         else if (command == "PrintAll_DL") {
@@ -268,7 +268,7 @@ int main() {
             PrintAll_DL(dl);
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(end - start).count();
-            cout << "PrintAll_DL ¼öÇà½Ã°£: " << duration << "ÃÊ" << '\n';
+            cout << "PrintAll_DL ìˆ˜í–‰ì‹œê°„: " << duration << "ì´ˆ" << '\n';
             cout << "\n";
         }
         else if (command == "SortByName_SL") {
@@ -276,7 +276,7 @@ int main() {
             SortByName_SL(sl);
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(end - start).count();
-            cout << "SortByName_SL ¼öÇà½Ã°£: " << duration << "ÃÊ" << '\n';
+            cout << "SortByName_SL ìˆ˜í–‰ì‹œê°„: " << duration << "ì´ˆ" << '\n';
             cout << '\n';
         }
         else if (command == "SortByName_DL") {
@@ -284,7 +284,7 @@ int main() {
             SortByName_DL(dl);
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(end - start).count();
-            cout << "SortByName_DL ¼öÇà½Ã°£: " << duration << "ÃÊ" << '\n';
+            cout << "SortByName_DL ìˆ˜í–‰ì‹œê°„: " << duration << "ì´ˆ" << '\n';
             cout << '\n';
         }
         else if (command == "FindMaxHp_SL") {
@@ -292,7 +292,7 @@ int main() {
             FindMaxHp_SL(sl);
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(end - start).count();
-            cout << "FindMaxHp_SL ¼öÇà½Ã°£: " << duration << "ÃÊ" << '\n';
+            cout << "FindMaxHp_SL ìˆ˜í–‰ì‹œê°„: " << duration << "ì´ˆ" << '\n';
             cout << '\n';
         }
         else if (command == "FindMaxHp_DL") {
@@ -300,11 +300,11 @@ int main() {
             FindMaxHp_DL(dl);
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<seconds>(end - start).count();
-            cout << "FindMaxHp_DL ¼öÇà½Ã°£: " << duration << "ÃÊ" << '\n';
+            cout << "FindMaxHp_DL ìˆ˜í–‰ì‹œê°„: " << duration << "ì´ˆ" << '\n';
             cout << '\n';
         }
         else {
-            cout << "Àß¸øµÈ ¸í·É¾îÀÔ´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä" << '\n';
+            cout << "ìž˜ëª»ëœ ëª…ë ¹ì–´ìž…ë‹ˆë‹¤. ë‹¤ì‹œ ìž…ë ¥í•˜ì„¸ìš”" << '\n';
 			cout << '\n';
 		}
 	}
