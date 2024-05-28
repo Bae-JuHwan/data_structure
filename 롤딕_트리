@@ -238,9 +238,11 @@ int main() {
 
 	cout << "명령어를 입력하세요" << '\n';
 	cout << "SortByName_SL : SL을 이용해서 이름 순서대로 정렬" << '\n';
-	cout << "SearchByName_BT : BT를 이용해서 챔피언 이름 찾기" << '\n';
+	cout << "SearchByName_BT : BT를 이용해서 검색한 챔피언 찾기" << '\n';
+	cout << "Insert_BT : BT를 이용해서 새로운 챔피언 생성" << '\n';
 	cout << "Delete_BT : BT를 이용해서 챔피언 삭제" << '\n';
 	cout << "PrintAll_BT : BT를 이용해서 모든 챔피언 정보 출력" << '\n';
+	cout << "SortByName_BT : BT를 이용해서 이름의 크기순으로 정렬" << '\n';
 	cout << '\n';
 
 	QueryPerformanceCounter(&frequency);
