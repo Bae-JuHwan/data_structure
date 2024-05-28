@@ -212,19 +212,13 @@ void PrintAll_BT(BT_Node* tree) {
 	PrintAll_BT(tree->rightChild);
 }
 
-void SwapChildren(BT_Node* tree) {
+void SortByName_BT(BT_Node* tree) {
 	if (tree == nullptr) {
 		return;
 	}
-	swap(tree->leftChild, tree->rightChild);
-	SwapChildren(tree->leftChild);
-	SwapChildren(tree->rightChild);
-}
-
-void SortByName_BT(BT_Node* tree) {
-	SwapChildren(tree);
-	PrintAll_BT(tree);
-	SwapChildren(tree);
+	PrintAll_BT(tree->rightChild);
+	cout << tree->position << ", " << tree->name << ", " << tree->health << ", " << tree->attack << ", " << tree->defense << '\n';
+	PrintAll_BT(tree->leftChild);
 }
 
 int main() {
