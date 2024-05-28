@@ -5,7 +5,7 @@
 
 using namespace std;
 
-struct Champion {				// Ã¨ÇÇ¾ğÀÇ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ´Â ±¸Á¶Ã¼
+struct Champion {				// ì±”í”¼ì–¸ì˜ ë°ì´í„°ë¥¼ ì €ì¥í•˜ëŠ” êµ¬ì¡°ì²´
 	string position;
 	string name;
 	int health;
@@ -16,7 +16,7 @@ struct Champion {				// Ã¨ÇÇ¾ğÀÇ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ´Â ±¸Á¶Ã¼
 		position(p), name(n), health(h), attack(a), defense(d) {}
 };
 
-class Node {					// ³ëµåÀÇ Æ²À» Â¥´Â Å¬·¡½º
+class Node {					// ë…¸ë“œì˜ í‹€ì„ ì§œëŠ” í´ë˜ìŠ¤
 public:
 	Champion champion;
 	Node* next;
@@ -25,7 +25,7 @@ public:
 		champion(p, n, h, a, d), next(nullptr) {};
 };
 
-class SL {						// ¿¬°á¸®½ºÆ®ÀÇ Æ²À» Â¥´Â Å¬·¡½º
+class SL {						// ì—°ê²°ë¦¬ìŠ¤íŠ¸ì˜ í‹€ì„ ì§œëŠ” í´ë˜ìŠ¤
 public:
 	Node* head;
 	Node* tail;
@@ -87,7 +87,7 @@ public:
 	}
 };
 
-struct BT_Node {				// ÀÌÁø Æ®¸® ±¸Á¶Ã¼
+struct BT_Node {				// ì´ì§„ íŠ¸ë¦¬ êµ¬ì¡°ì²´
 	string position;
 	string name;
 	int health;
@@ -144,23 +144,23 @@ void Insert_BT(BT_Node*& btRoot) {
 	string position, name;
 	int health, attack, defense;
 
-	cout << "Ã¨ÇÇ¾ğ Á¤º¸¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << '\n';
-	cout << "Æ÷Áö¼Ç: ";
+	cout << "ì±”í”¼ì–¸ ì •ë³´ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << '\n';
+	cout << "í¬ì§€ì…˜: ";
 	getline(cin, position);
-	cout << "ÀÌ¸§: ";
+	cout << "ì´ë¦„: ";
 	getline(cin, name);
-	cout << "Ã¼·Â: ";
+	cout << "ì²´ë ¥: ";
 	cin >> health;
-	cout << "°ø°İ·Â: ";
+	cout << "ê³µê²©ë ¥: ";
 	cin >> attack;
-	cout << "¹æ¾î·Â: ";
+	cout << "ë°©ì–´ë ¥: ";
 	cin >> defense;
 	cin.ignore();
 
 	BT_Node* newNode = new BT_Node(position, name, health, attack, defense);
 	AddNodeToBT(btRoot, newNode);
 
-	cout << "Ã¨ÇÇ¾ğÀÌ ¼º°øÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù.\n";
+	cout << "ì±”í”¼ì–¸ì´ ì„±ê³µì ìœ¼ë¡œ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.\n";
 }
 
 BT_Node* FindMin(BT_Node* tree) {
@@ -228,7 +228,7 @@ void SortByName_BT(BT_Node* tree) {
 }
 
 int main() {
-	ifstream in("ÀÓ½Ã.txt");
+	ifstream in("ì„ì‹œ.txt");
 	SL sl;
 	BT_Node* btRoot = nullptr;
 	LARGE_INTEGER start, end, frequency;
@@ -242,11 +242,11 @@ int main() {
 		AddNodeToBT(btRoot, newNode);
 	}
 
-	cout << "¸í·É¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä" << '\n';
-	cout << "SortByName_SL : SLÀ» ÀÌ¿ëÇØ¼­ ÀÌ¸§ ¼ø¼­´ë·Î Á¤·Ä" << '\n';
-	cout << "SearchByName_BT : BT¸¦ ÀÌ¿ëÇØ¼­ Ã¨ÇÇ¾ğ ÀÌ¸§ Ã£±â" << '\n';
-	cout << "Delete_BT : BT¸¦ ÀÌ¿ëÇØ¼­ Ã¨ÇÇ¾ğ »èÁ¦" << '\n';
-	cout << "PrintAll_BT : BT¸¦ ÀÌ¿ëÇØ¼­ ¸ğµç Ã¨ÇÇ¾ğ Á¤º¸ Ãâ·Â" << '\n';
+	cout << "ëª…ë ¹ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”" << '\n';
+	cout << "SortByName_SL : SLì„ ì´ìš©í•´ì„œ ì´ë¦„ ìˆœì„œëŒ€ë¡œ ì •ë ¬" << '\n';
+	cout << "SearchByName_BT : BTë¥¼ ì´ìš©í•´ì„œ ì±”í”¼ì–¸ ì´ë¦„ ì°¾ê¸°" << '\n';
+	cout << "Delete_BT : BTë¥¼ ì´ìš©í•´ì„œ ì±”í”¼ì–¸ ì‚­ì œ" << '\n';
+	cout << "PrintAll_BT : BTë¥¼ ì´ìš©í•´ì„œ ëª¨ë“  ì±”í”¼ì–¸ ì •ë³´ ì¶œë ¥" << '\n';
 	cout << '\n';
 
 	QueryPerformanceCounter(&frequency);
@@ -260,10 +260,10 @@ int main() {
 			sl.SortByName_SL();
 			QueryPerformanceCounter(&end);
 			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
-			cout << "¼öÇà½Ã°£ : " << elapsedTime << "¸¶ÀÌÅ©·ÎÃÊ" << '\n';
+			cout << "ìˆ˜í–‰ì‹œê°„ : " << elapsedTime << "ë§ˆì´í¬ë¡œì´ˆ" << '\n';
 		}
 		else if (command == "SearchByName_BT") {
-			cout << "ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä : ";		// P54151216
+			cout << "ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš” : ";		// P54151216
 			string targetName;
 			getline(cin, targetName);
 			QueryPerformanceCounter(&start);
@@ -272,26 +272,26 @@ int main() {
 			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
 
 			if (result != nullptr) {
-				cout << "Æ÷Áö¼Ç: " << result->position << '\n';
-				cout << "ÀÌ¸§: " << result->name << '\n';
-				cout << "Ã¼·Â: " << result->health << '\n';
-				cout << "°ø°İ·Â: " << result->attack << '\n';
-				cout << "¹æ¾î·Â: " << result->defense << '\n';
+				cout << "í¬ì§€ì…˜: " << result->position << '\n';
+				cout << "ì´ë¦„: " << result->name << '\n';
+				cout << "ì²´ë ¥: " << result->health << '\n';
+				cout << "ê³µê²©ë ¥: " << result->attack << '\n';
+				cout << "ë°©ì–´ë ¥: " << result->defense << '\n';
 			}
 			else {
-				cout << "Ã¨ÇÇ¾ğÀ» Ã£À» ¼ö ¾øÀ½" << '\n';
+				cout << "ì±”í”¼ì–¸ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ" << '\n';
 			}
-			cout << "¼öÇà½Ã°£ : " << elapsedTime << "¸¶ÀÌÅ©·ÎÃÊ" << '\n';
+			cout << "ìˆ˜í–‰ì‹œê°„ : " << elapsedTime << "ë§ˆì´í¬ë¡œì´ˆ" << '\n';
 		}
 		else if (command == "Insert_BT") {
 			QueryPerformanceCounter(&start);
 			Insert_BT(btRoot);
 			QueryPerformanceCounter(&end);
 			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
-			cout << "¼öÇà½Ã°£ : " << elapsedTime << "¸¶ÀÌÅ©·ÎÃÊ" << '\n';
+			cout << "ìˆ˜í–‰ì‹œê°„ : " << elapsedTime << "ë§ˆì´í¬ë¡œì´ˆ" << '\n';
 		}
 		else if (command == "Delete_BT") {
-			cout << "»èÁ¦ÇÒ Ã¨ÇÇ¾ğÀÇ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ";
+			cout << "ì‚­ì œí•  ì±”í”¼ì–¸ì˜ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”: ";
 			string targetName;
 			getline(cin, targetName);
 
@@ -300,24 +300,24 @@ int main() {
 			QueryPerformanceCounter(&end);
 			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
 
-			cout << "¼öÇà½Ã°£ : " << elapsedTime << "¸¶ÀÌÅ©·ÎÃÊ" << '\n';
+			cout << "ìˆ˜í–‰ì‹œê°„ : " << elapsedTime << "ë§ˆì´í¬ë¡œì´ˆ" << '\n';
 		}
 		else if (command == "PrintAll_BT") {
 			QueryPerformanceCounter(&start);
 			PrintAll_BT(btRoot);
 			QueryPerformanceCounter(&end);
 			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
-			cout << "¼öÇà½Ã°£ : " << elapsedTime << "¸¶ÀÌÅ©·ÎÃÊ" << '\n';
+			cout << "ìˆ˜í–‰ì‹œê°„ : " << elapsedTime << "ë§ˆì´í¬ë¡œì´ˆ" << '\n';
 		}
 		else if (command == "SortByName_BT") {
 			QueryPerformanceCounter(&start);
 			SortByName_BT(btRoot);
 			QueryPerformanceCounter(&end);
 			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
-			cout << "¼öÇà½Ã°£ : " << elapsedTime << "¸¶ÀÌÅ©·ÎÃÊ" << '\n';
+			cout << "ìˆ˜í–‰ì‹œê°„ : " << elapsedTime << "ë§ˆì´í¬ë¡œì´ˆ" << '\n';
 		}
 		else {
-			cout << "Àß¸øÀÔ·ÂÇÏ¿´½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä" << '\n';
+			cout << "ì˜ëª»ì…ë ¥í•˜ì˜€ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”" << '\n';
 			cout << '\n';
 		}
 	}
