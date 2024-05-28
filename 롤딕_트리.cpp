@@ -1,0 +1,325 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <Windows.h>
+
+using namespace std;
+
+struct Champion {				// 챔피언의 데이터를 저장하는 구조체
+	string position;
+	string name;
+	int health;
+	int attack;
+	int defense;
+
+	Champion(string p, string n, int h, int a, int d) :
+		position(p), name(n), health(h), attack(a), defense(d) {}
+};
+
+class Node {					// 노드의 틀을 짜는 클래스
+public:
+	Champion champion;
+	Node* next;
+
+	Node(string p, string n, int h, int a, int d) :
+		champion(p, n, h, a, d), next(nullptr) {};
+};
+
+class SL {						// 연결리스트의 틀을 짜는 클래스
+public:
+	Node* head;
+	Node* tail;
+
+	SL() : head(nullptr), tail(nullptr) {}
+
+	void AddNodeToSL(string position, string name, int health, int attack, int defense) {
+		Node* newNodeSL = new Node(position, name, health, attack, defense);
+
+		if (head == nullptr) {
+			head = newNodeSL;
+			tail = newNodeSL;
+			newNodeSL->next = newNodeSL;
+		}
+		else {
+			newNodeSL->next = head;
+			tail->next = newNodeSL;
+			tail = newNodeSL;
+		}
+	}
+
+	void PrintAll_SL() {
+		if (head == nullptr) {
+			return;
+		}
+		Node* current = head;
+		do {
+			cout << current->champion.position << ", " << current->champion.name << ", " << current->champion.health << ", "
+				<< current->champion.attack << ", " << current->champion.defense << '\n';
+			current = current->next;
+		} while (current != head);
+		cout << '\n';
+	}
+
+	void swap(Node* a, Node* b) {
+		Champion temp = a->champion;
+		a->champion = b->champion;
+		b->champion = temp;
+	}
+
+	void SortByName_SL() {
+		if (head == nullptr || head->next == head) {
+			return;
+		}
+		bool swapped;
+		do {
+			swapped = false;
+			Node* current = head;
+			Node* next = head->next;
+			do {
+				if (current->champion.name < next->champion.name) {
+					swap(current, next);
+					swapped = true;
+				}
+				current = next;
+				next = current->next;
+			} while (current != tail);
+		} while (swapped);
+	}
+};
+
+struct BT_Node {				// 이진 트리 구조체
+	string position;
+	string name;
+	int health;
+	int attack;
+	int defense;
+
+	BT_Node* leftChild = nullptr;
+	BT_Node* rightChild = nullptr;
+
+	BT_Node(string p, string n, int h, int a, int d) :
+		position(p), name(n), health(h), attack(a), defense(d), leftChild(nullptr), rightChild(nullptr) {};
+};
+
+void AddNodeToBT(BT_Node*& tree, BT_Node* node) {
+	if (tree == nullptr) {
+		tree = node;
+		return;
+	}
+	if (node->name < tree->name) {
+		if (tree->leftChild == nullptr) {
+			tree->leftChild = node;
+		}
+		else {
+			AddNodeToBT(tree->leftChild, node);
+		}
+	}
+	else if (node->name > tree->name) {
+		if (tree->rightChild == nullptr) {
+			tree->rightChild = node;
+		}
+		else {
+			AddNodeToBT(tree->rightChild, node);
+		}
+	}
+}
+
+BT_Node* SearchByName_BT(BT_Node* tree, const string& targetName) {
+	if (tree == nullptr) {
+		return nullptr;
+	}
+
+	if (tree->name == targetName) {
+		return tree;
+	}
+	else if (tree->name > targetName) {
+		return SearchByName_BT(tree->leftChild, targetName);
+	}
+	else {
+		return SearchByName_BT(tree->rightChild, targetName);
+	}
+}
+
+void Insert_BT(BT_Node*& btRoot) {
+	string position, name;
+	int health, attack, defense;
+
+	cout << "챔피언 정보를 입력하세요" << '\n';
+	cout << "포지션: ";
+	getline(cin, position);
+	cout << "이름: ";
+	getline(cin, name);
+	cout << "체력: ";
+	cin >> health;
+	cout << "공격력: ";
+	cin >> attack;
+	cout << "방어력: ";
+	cin >> defense;
+	cin.ignore();
+
+	BT_Node* newNode = new BT_Node(position, name, health, attack, defense);
+	AddNodeToBT(btRoot, newNode);
+
+	cout << "챔피언이 성공적으로 추가되었습니다.\n";
+}
+
+BT_Node* FindMin(BT_Node* tree) {
+	while (tree->leftChild != nullptr) {
+		tree = tree->leftChild;
+	}
+	return tree;
+}
+
+BT_Node* Delete_BT(BT_Node* tree, const string& targetName) {
+	if (tree == nullptr) {
+		return tree;
+	}
+	if (targetName < tree->name) {
+		tree->leftChild = Delete_BT(tree->leftChild, targetName);
+	}
+	else if (targetName > tree->name) {
+		tree->rightChild = Delete_BT(tree->rightChild, targetName);
+	}
+	else {
+		if (tree->leftChild == nullptr) {
+			BT_Node* temp = tree->rightChild;
+			delete tree;
+			return temp;
+		}
+		else if (tree->rightChild == nullptr) {
+			BT_Node* temp = tree->leftChild;
+			delete tree;
+			return temp;
+		}
+
+		BT_Node* temp = FindMin(tree->rightChild);
+		tree->name = temp->name;
+		tree->position = temp->position;
+		tree->health = temp->health;
+		tree->attack = temp->attack;
+		tree->defense = temp->defense;
+		tree->rightChild = Delete_BT(tree->rightChild, targetName);
+	}
+	return tree;
+}
+
+void PrintAll_BT(BT_Node* tree) {
+	if (tree == nullptr) {
+		return;
+	}
+	PrintAll_BT(tree->leftChild);
+	cout << tree->position << ", " << tree->name << ", " << tree->health << ", " << tree->attack << ", " << tree->defense << '\n';
+	PrintAll_BT(tree->rightChild);
+}
+
+void SwapChildren(BT_Node* tree) {
+	if (tree == nullptr) {
+		return;
+	}
+	swap(tree->leftChild, tree->rightChild);
+	SwapChildren(tree->leftChild);
+	SwapChildren(tree->rightChild);
+}
+
+void SortByName_BT(BT_Node* tree) {
+	SwapChildren(tree);
+	PrintAll_BT(tree);
+	SwapChildren(tree);
+}
+
+int main() {
+	ifstream in("임시.txt");
+	SL sl;
+	BT_Node* btRoot = nullptr;
+	LARGE_INTEGER start, end, frequency;
+
+	string position, name;
+	int health, attack, defense;
+
+	while (in >> position >> name >> health >> attack >> defense) {
+		sl.AddNodeToSL(position, name, health, attack, defense);
+		BT_Node* newNode = new BT_Node(position, name, health, attack, defense);
+		AddNodeToBT(btRoot, newNode);
+	}
+
+	cout << "명령어를 입력하세요" << '\n';
+	cout << "SortByName_SL : SL을 이용해서 이름 순서대로 정렬" << '\n';
+	cout << "SearchByName_BT : BT를 이용해서 챔피언 이름 찾기" << '\n';
+	cout << "Delete_BT : BT를 이용해서 챔피언 삭제" << '\n';
+	cout << "PrintAll_BT : BT를 이용해서 모든 챔피언 정보 출력" << '\n';
+	cout << '\n';
+
+	QueryPerformanceCounter(&frequency);
+
+	while (true) {
+		string command;
+		getline(cin, command);
+
+		if (command == "SortByName_SL") {
+			QueryPerformanceCounter(&start);
+			sl.SortByName_SL();
+			QueryPerformanceCounter(&end);
+			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
+			cout << "수행시간 : " << elapsedTime << "마이크로초" << '\n';
+		}
+		else if (command == "SearchByName_BT") {
+			cout << "이름을 입력하세요 : ";		// P54151216
+			string targetName;
+			getline(cin, targetName);
+			QueryPerformanceCounter(&start);
+			BT_Node* result = SearchByName_BT(btRoot, targetName);
+			QueryPerformanceCounter(&end);
+			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
+
+			if (result != nullptr) {
+				cout << "포지션: " << result->position << '\n';
+				cout << "이름: " << result->name << '\n';
+				cout << "체력: " << result->health << '\n';
+				cout << "공격력: " << result->attack << '\n';
+				cout << "방어력: " << result->defense << '\n';
+			}
+			else {
+				cout << "챔피언을 찾을 수 없음" << '\n';
+			}
+			cout << "수행시간 : " << elapsedTime << "마이크로초" << '\n';
+		}
+		else if (command == "Insert_BT") {
+			QueryPerformanceCounter(&start);
+			Insert_BT(btRoot);
+			QueryPerformanceCounter(&end);
+			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
+			cout << "수행시간 : " << elapsedTime << "마이크로초" << '\n';
+		}
+		else if (command == "Delete_BT") {
+			cout << "삭제할 챔피언의 이름을 입력하세요: ";
+			string targetName;
+			getline(cin, targetName);
+
+			QueryPerformanceCounter(&start);
+			btRoot = Delete_BT(btRoot, targetName);
+			QueryPerformanceCounter(&end);
+			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
+
+			cout << "수행시간 : " << elapsedTime << "마이크로초" << '\n';
+		}
+		else if (command == "PrintAll_BT") {
+			QueryPerformanceCounter(&start);
+			PrintAll_BT(btRoot);
+			QueryPerformanceCounter(&end);
+			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
+			cout << "수행시간 : " << elapsedTime << "마이크로초" << '\n';
+		}
+		else if (command == "SortByName_BT") {
+			QueryPerformanceCounter(&start);
+			SortByName_BT(btRoot);
+			QueryPerformanceCounter(&end);
+			double elapsedTime = static_cast<double>(end.QuadPart - start.QuadPart) * 1000000.0 / frequency.QuadPart;
+			cout << "수행시간 : " << elapsedTime << "마이크로초" << '\n';
+		}
+		else {
+			cout << "잘못입력하였습니다. 다시 입력하세요" << '\n';
+			cout << '\n';
+		}
+	}
+	return 0;
+}
