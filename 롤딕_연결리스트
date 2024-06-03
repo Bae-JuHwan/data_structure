@@ -137,7 +137,7 @@ void Delete_SL(Node* &head, Node* tail, const string& championName) {		// delete
 	bool deleted = false;													// 예외처리를 위한 불함수
 
 	do {																	// 환형 연결리스트이기 때문에 do-while조건문을 사용(while문을 사용한다면 무한루프에 빠짐)
-		if (current->name == championName) {								// 현재위치의 이름이 입력한 챔피언 이름과 같다면
+		if (current->name == championName) {								
 			if (current == head) {											// 현재위치가 헤드일때
 				head = current->next;										// 현재위치의 다음을 헤드로 바꿈
 				tail->next = head;											// 테일의 다음은 헤드(헤드의 위치가 바뀌었으니까 원래 헤드였던 노드를 건너뛰고 연결)
